@@ -153,6 +153,7 @@ const MiniPageBuilder = () => {
                 fontSize: component.fontSize + "px" || "auto",
                 fontWeight: component.fontWeight || "auto",
                 position: "absolute",
+                width :  component?.type == "Input" ? '20%' :'auto'
               }}
               className={`draggableElem component_${
                 selectedComponentIndex === index ? "selected" : ""
@@ -163,7 +164,7 @@ const MiniPageBuilder = () => {
               {component?.type === "Label" ? (
                 component?.text || component?.type
               ) : component?.type === "Input" ? (
-                <input type="text" value={component?.text} readOnly={true} />
+                <input type="text" value={component?.text} readOnly={true}/>
               ) : (
                 <button>{component?.text || component?.type}</button>
               )}
