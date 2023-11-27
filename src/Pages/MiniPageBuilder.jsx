@@ -132,6 +132,19 @@ const MiniPageBuilder = () => {
     link.click();
   };
 
+  const handleChange = (event, index) => {
+    const updatedComponents = [...components];
+    debugger;
+    if (updatedComponents[index]) {
+      updatedComponents[index] = {
+        ...updatedComponents[index],
+        [event.target.name]: event.target.value,
+      };
+      setComponents(updatedComponents);
+      saveToLocalStorage(updatedComponents);
+    }
+  };
+
   return (
     <div>
       <div className="pageBuilderContainer">
@@ -153,7 +166,7 @@ const MiniPageBuilder = () => {
                 fontSize: component.fontSize + "px" || "auto",
                 fontWeight: component.fontWeight || "auto",
                 position: "absolute",
-                width :  component?.type == "Input" ? '20%' :'auto'
+                width: component?.type == "Input" ? "20%" : "auto",
               }}
               className={`draggableElem component_${
                 selectedComponentIndex === index ? "selected" : ""
@@ -164,7 +177,12 @@ const MiniPageBuilder = () => {
               {component?.type === "Label" ? (
                 component?.text || component?.type
               ) : component?.type === "Input" ? (
-                <input type="text" value={component?.text} readOnly={true}/>
+                <input
+                  type="text"
+                  name="text"
+                  value={component?.text}
+                  onChange={(event) => handleChange(event, index)}
+                />
               ) : (
                 <button>{component?.text || component?.type}</button>
               )}
