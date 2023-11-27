@@ -12,6 +12,10 @@ You may also see any lint errors in the console.
 
 # Mini-Page-Builder Component Documentation
 
+# Overview
+
+- The 'MiniPageBuilder' component is a React component designed for building pages with draggable and customizable components. It allows users to drag and drop components onto a blank container, configure their properties, and save the page configuration.
+
 # Working
 
 - Upon opening the link, you will encounter a Mini Page Builder UI featuring a sidebar on one side containing blocks (Label, Input, Button), and a blank canvas on the other.
@@ -21,10 +25,6 @@ You may also see any lint errors in the console.
 - Upon pressing 'Enter,' a modal will immediately open with pre-filled details from the initial creation. Modify the data as needed and click 'Save Changes' to update the selected component.
 - For deleting an element, select it and press either 'Delete' or 'Backspace' on your keyboard. Note that for deleting an input field, ensure that the element is selected and not in focus (input should not focussed).
 - By clicking 'Export Configuration,' the component data will be downloaded in a JSON file for easy storage and retrieval.
-
-# Overview
-
-- The 'MiniPageBuilder' component is a React component designed for building pages with draggable and customizable components. It allows users to drag and drop components onto a blank container, configure their properties, and save the page configuration.
 
 # Take a look
 
@@ -52,6 +52,7 @@ The 'MiniPageBuilder' component consists of the following major sections:
 - 'selectedComponentIndex': Index of the currently selected component.
 - 'coordinates': Object containing clientX, clientY, mode, and type information for dragging and dropping.
 - 'isOpen': Boolean to control the visibility of the modal.
+- 'focused': Boolean to know the input tag is focussed or not.
 
 # Event Handlers:
 

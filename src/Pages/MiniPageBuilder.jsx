@@ -13,7 +13,7 @@ const MiniPageBuilder = () => {
     type: "",
   });
   const [isOpen, setIsOpen] = useState(false);
-  const [focused, setFocused] = React.useState(false);
+  const [focused, setFocused] = useState(false);
 
   //a function will work when user start drag the element
   const handleDragStart = (event, type, index = "") => {
