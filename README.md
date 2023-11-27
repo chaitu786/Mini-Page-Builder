@@ -2,7 +2,9 @@
 
 - Mini Page builder to build the mini pages.
 - To start locally run following commands
+
 ### `npm install` - To install the dependancies
+
 ### `npm start` - To start the server
 
 Runs the app in the development mode.\
