@@ -1,6 +1,6 @@
 # Getting Started with Mini Page builder
 
-- To start local server run following commands
+To start local server run following commands
 
 ### `npm install` - To install the dependancies
 
