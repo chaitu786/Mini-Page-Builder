@@ -13,6 +13,7 @@ const MiniPageBuilder = () => {
     type: "",
   });
   const [isOpen, setIsOpen] = useState(false);
+  const [focused, setFocused] = React.useState(false);
 
   //a function will work when user start drag the element
   const handleDragStart = (event, type, index = "") => {
@@ -105,14 +106,15 @@ const MiniPageBuilder = () => {
   };
 
   //a function is to access the pressed keys on key board like "Enter" "Delete"
-  const handleKeyPress = (event, index) => {
+  const handleKeyPress = (event) => {
+    debugger;
     //condition to check enter pressed or not
-    if (selectedComponentIndex === index && event.key === "Enter") {
+    if (event.key === "Enter") {
       event.preventDefault();
       setCoordinates({ ...coordinates, mode: "edit" });
       setIsOpen(true);
     } //condition to check delete pressed or not
-    else if (selectedComponentIndex === index && event.key === "Backspace") {
+    else if (event.key === "Backspace" && !focused) {
       event.preventDefault();
       let x = components.filter((_, index) => index !== selectedComponentIndex);
       setComponents(x);
@@ -161,7 +163,7 @@ const MiniPageBuilder = () => {
   };
 
   return (
-    <div>
+    <div tabIndex={0} onKeyDown={(e) => handleKeyPress(e)}>
       <div className="pageBuilderContainer">
         {/* blank page */}
         <div
@@ -188,8 +190,6 @@ const MiniPageBuilder = () => {
               className={`draggableElem component_${
                 selectedComponentIndex === index ? "selected" : ""
               }`}
-              onKeyDown={(e) => handleKeyPress(e, index)}
-              tabIndex={0}
             >
               {component?.type === "Label" ? (
                 component?.text || component?.type
@@ -199,6 +199,8 @@ const MiniPageBuilder = () => {
                   name="text"
                   value={component?.text}
                   onChange={(event) => handleChange(event, index)}
+                  onFocus={() => setFocused(true)}
+                  onBlur={() => setFocused(false)}
                 />
               ) : (
                 <button>{component?.text || component?.type}</button>

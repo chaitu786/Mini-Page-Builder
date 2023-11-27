@@ -12,11 +12,22 @@ You may also see any lint errors in the console.
 
 # Mini-Page-Builder Component Documentation
 
+# Working
+
+- Upon opening the link, you will encounter a Mini Page Builder UI featuring a sidebar on one side containing blocks (Label, Input, Button), and a blank canvas on the other.
+- You can seamlessly drag and drop Labels, Inputs, or Buttons from the sidebar onto the blank canvas. Once dropped, a modal will appear, pre-filled with X and Y configuration settings.
+- Fill in the details in the modal, click 'Save Changes,' and the details will be saved. The modal will close, and the dragged element will be rendered on the blank canvas according to the provided details and it will placed accoring to X and Y configurations.
+- To select an element, simply click on it. The selected element will display a red border for easy identification. If you wish to edit the details, select the element and press 'Enter' on your keyboard.
+- Upon pressing 'Enter,' a modal will immediately open with pre-filled details from the initial creation. Modify the data as needed and click 'Save Changes' to update the selected component.
+- For deleting an element, select it and press either 'Delete' or 'Backspace' on your keyboard. Note that for deleting an input field, ensure that the element is selected and not in focus (input should not focussed).
+- By clicking 'Export Configuration,' the component data will be downloaded in a JSON file for easy storage and retrieval.
+
 # Overview
 
 - The 'MiniPageBuilder' component is a React component designed for building pages with draggable and customizable components. It allows users to drag and drop components onto a blank container, configure their properties, and save the page configuration.
 
 # Take a look
+
 - Deploy: [Link](https://mini-page-builder-ten.vercel.app/)
 
 # Dependencies
