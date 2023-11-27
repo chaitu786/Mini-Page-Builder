@@ -82,7 +82,7 @@ The 'MiniPageBuilder' component consists of the following major sections:
 
 # Export Configuration:
 
-- Provides a button to export the current page configurations as a JSON file for easy storage and retrieval.
+- Provides a button to export the current page components configurations as a JSON file for easy storage and retrieval.
 
 ## Styling
 
