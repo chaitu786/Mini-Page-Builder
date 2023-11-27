@@ -1,6 +1,5 @@
 # Getting Started with Mini Page builder
 
-- Mini Page builder to build the mini pages.
 - To start locally run following commands
 
 ### `npm install` - To install the dependancies
