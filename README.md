@@ -1,8 +1,9 @@
 # Getting Started with Mini Page builder
 
-Mini Page builder to build the mini pages.
-
-### `npm start`
+- Mini Page builder to build the mini pages.
+- To start locally run following commands
+### `npm install` - To install the dependancies
+### `npm start` - To start the server
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
