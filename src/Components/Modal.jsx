@@ -5,11 +5,13 @@ import cancel from "../assets/cancel.svg"
 const Modal = (props) => {
   const [inputs, setInputs] = useState({});
 
+  //setting the state according to input changes in modal
   const handleInputChange = (e) => {
     let { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
 
+  //a function to save changes
   const handleSaveChanges = () => {
     props.handleSaveChanges(
       inputs,

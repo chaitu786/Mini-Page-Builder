@@ -1,10 +1,6 @@
-# Getting Started with Create React App
+# Getting Started with Mini Page builder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
+Mini Page builder to build the mini pages.
 
 ### `npm start`
 
@@ -14,58 +10,70 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+# Mini-Page-Builder Component Documentation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Overview
 
-### `npm run build`
+The 'MiniPageBuilder' component is a React component designed for building pages with draggable and customizable components. It allows users to drag and drop components onto a blank container, configure their properties, and save the page configuration.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+React: The component is built using React, a JavaScript library for building user interfaces.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# File Structure
 
-### `npm run eject`
+MiniPageBuilder.js: The main React component file.
+'../Css/PageBuilder.css': CSS file for styling the page builder.
+'../assets/grip-vertical.svg': SVG image for the vertical grip.
+'../Components/Modal.js': Component for displaying a modal to edit component properties.
+'../Css/Modal.css': CSS file for styling the modal.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Component Structure
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The 'MiniPageBuilder' component consists of the following major sections:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. # State Variables:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   'components': An array of objects representing the dropped components on the page.
+   'selectedComponentIndex': Index of the currently selected component.
+   'coordinates': Object containing clientX, clientY, mode, and type information for dragging and dropping.
+   'isOpen': Boolean to control the visibility of the modal.
 
-## Learn More
+2. # Event Handlers:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   'handleDragStart': Initiates the drag operation and sets data for the dragged component.
+   'handleDragEnd': Handles the end of the drag operation by removing the "dragging" class.
+   'handleDrop': Handles the drop event, updating component positions or opening a modal for a new component.
+   'handleSelect': Selects a dropped component for editing.
+   'handleSaveChanges': Saves changes made in the modal to the component state.
+   'handleCloseModal': Closes the modal.
+   'handleKeyPress': Handles key presses for editing or deleting components.
+   'saveToLocalStorage': Saves the component data to local storage.
+   'handleChange': Handles changes in input fields for the selected component.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. # Effect Hooks:
 
-### Code Splitting
+   'useEffect': Clears the selected component when a new element is added.
+   'useEffect': Retrieves component data from local storage on mount.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+4. # Rendering:
 
-### Analyzing the Bundle Size
+   Renders the blank container for dropping components.
+   Renders the sidebar with draggable blocks (Label, Input, Button).
+   Maps over the components array to render the dropped components with drag and edit functionality.
+   Renders the Modal component for editing component properties.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+5. # Export Configuration:
+   Provides a button to export the current page configurations as a JSON file.
 
-### Making a Progressive Web App
+## Styling
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The styling for the page builder is defined in the PageBuilder.css and Modal.css file. You can customize the styles to fit your application's design.
 
-### Advanced Configuration
+## Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Components and their configurations are stored in local storage for persistence.
+The Modal component is used for editing component properties.
+Components can be dragged, dropped, edited, and deleted using keyboard shortcuts.
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 # Mini-Page-Builder

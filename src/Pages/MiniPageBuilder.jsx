@@ -14,30 +14,33 @@ const MiniPageBuilder = () => {
   });
   const [isOpen, setIsOpen] = useState(false);
 
+  //a function will work when user start drag the element
   const handleDragStart = (event, type, index = "") => {
-    event.target.classList.add("dragging");
-    const boundingRect = event.target.getBoundingClientRect();
+    event.target.classList.add("dragging"); //setting the class dragging to change the cursor type
+    const boundingRect = event.target.getBoundingClientRect(); // to set the draggable element perfect positiion where as the cursor placed
 
     const offsetX = event.clientX - boundingRect.left;
     const offsetY = event.clientY - boundingRect.top;
     event.dataTransfer.setData(
       "text/plain",
-      JSON.stringify({ type, index, offsetX, offsetY })
+      JSON.stringify({ type, index, offsetX, offsetY }) // by using this method setting the data whick ever we need to access on handle drop .
     );
   };
 
   const handleDragEnd = (event) => {
-    event.target.classList.remove("dragging");
+    event.target.classList.remove("dragging"); //removing the class dragging to change the cursor type
   };
 
+  // a function will work after dropping the element blank page and we can acces the event
   const handleDrop = (event) => {
     event.preventDefault();
-    const data = event.dataTransfer.getData("text/plain");
-    const { type, index, offsetX, offsetY } = JSON.parse(data);
-    const { clientX, clientY } = event;
+    const data = event.dataTransfer.getData("text/plain"); //getting the data which ever we set while drag start.
+    const { type, index, offsetX, offsetY } = JSON.parse(data); //destructuring the data
+    const { clientX, clientY } = event; //accessing the x and y coordinates from the event
 
     const updatedComponents = [...components];
 
+    //this function is for changing the position of element after dropped.
     if (updatedComponents[index]) {
       updatedComponents[index] = {
         ...updatedComponents[index],
@@ -45,27 +48,31 @@ const MiniPageBuilder = () => {
         clientX: clientX - offsetX,
         clientY: clientY - offsetY,
       };
-      setComponents(updatedComponents);
-      saveToLocalStorage(updatedComponents);
+      setComponents(updatedComponents); // setting components state
+      saveToLocalStorage(updatedComponents); //calling saveToLocalStorage function to strore data local storage.
       return;
     }
+    //setting the x , y coordinates from event
     setCoordinates({
       ...coordinates,
       clientX: clientX - offsetX,
-      clientY: clientY - offsetY + 20,
+      clientY: clientY - offsetY + 20, //20 adding for just positiuon adjustment
       mode: "",
       type,
     });
-    setIsOpen(true);
+    setIsOpen(true); // setting state to open modal
   };
 
+  // a function is to select the dropped component
   const handleSelect = (index) => {
     setSelectedComponentIndex(index);
   };
 
+  //function to save the changes made in modal
   const handleSaveChanges = (inputValues, mode, index) => {
     const updatedComponents = [...components];
     if (mode == "edit") {
+      //this is to update the dropped component
       if (updatedComponents[index]) {
         updatedComponents[index] = {
           ...updatedComponents[index],
@@ -73,10 +80,11 @@ const MiniPageBuilder = () => {
           clientX: inputValues.clientX,
           clientY: inputValues.clientY,
         };
-        setComponents(updatedComponents);
-        saveToLocalStorage(updatedComponents);
+        setComponents(updatedComponents); // setting components state
+        saveToLocalStorage(updatedComponents); //calling saveToLocalStorage function to strore data local storage.
       }
     } else {
+      // to create fresh dropped component
       updatedComponents.push({
         type: coordinates.type,
         clientX: inputValues.clientX,
@@ -85,22 +93,26 @@ const MiniPageBuilder = () => {
         fontSize: inputValues.fontSize,
         fontWeight: inputValues.fontWeight,
       });
-      setComponents(updatedComponents);
-      saveToLocalStorage(updatedComponents);
+      setComponents(updatedComponents); // setting components state
+      saveToLocalStorage(updatedComponents); //calling saveToLocalStorage function to strore data local storage.
     }
     setIsOpen(false);
   };
 
+  // function will work on clicking cancel icon
   const handleCloseModal = () => {
-    setIsOpen(false);
+    setIsOpen(false); //changing the modal state to close the modal
   };
 
+  //a function is to access the pressed keys on key board like "Enter" "Delete"
   const handleKeyPress = (event, index) => {
+    //condition to check enter pressed or not
     if (selectedComponentIndex === index && event.key === "Enter") {
       event.preventDefault();
       setCoordinates({ ...coordinates, mode: "edit" });
       setIsOpen(true);
-    } else if (selectedComponentIndex === index && event.key === "Backspace") {
+    } //condition to check delete pressed or not
+    else if (selectedComponentIndex === index && event.key === "Backspace") {
       event.preventDefault();
       let x = components.filter((_, index) => index !== selectedComponentIndex);
       setComponents(x);
@@ -108,14 +120,16 @@ const MiniPageBuilder = () => {
     }
   };
 
+  //a function to save the data in local storage
   const saveToLocalStorage = (updatedComponents) => {
     localStorage.setItem("components", JSON.stringify(updatedComponents));
   };
-
+  //removing the actve focus on sected component in each new element addded
   useEffect(() => {
     setSelectedComponentIndex(null);
   }, [components.length]);
 
+  // on mount getting the data from localstorage and setting in state
   useEffect(() => {
     const storedComponents = JSON.parse(localStorage.getItem("components"));
     if (storedComponents) {
@@ -123,6 +137,7 @@ const MiniPageBuilder = () => {
     }
   }, []);
 
+  // a function is to export json file to store coponents configuration data
   const handleExport = () => {
     const jsonData = JSON.stringify(components);
     const blob = new Blob([jsonData], { type: "application/json" });
@@ -132,9 +147,9 @@ const MiniPageBuilder = () => {
     link.click();
   };
 
+  //changeing the input chnages in dropped element
   const handleChange = (event, index) => {
     const updatedComponents = [...components];
-    debugger;
     if (updatedComponents[index]) {
       updatedComponents[index] = {
         ...updatedComponents[index],
@@ -148,11 +163,13 @@ const MiniPageBuilder = () => {
   return (
     <div>
       <div className="pageBuilderContainer">
+        {/* blank page */}
         <div
           className="blankContainer"
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
         >
+          {/* rendering the dropped components */}
           {components.map((component, index) => (
             <div
               draggable
@@ -189,6 +206,7 @@ const MiniPageBuilder = () => {
             </div>
           ))}
         </div>
+        {/* side bar with blocks */}
         <div className="sidebarContainer">
           <div>
             <h3>Blocks</h3>
@@ -231,6 +249,7 @@ const MiniPageBuilder = () => {
           </div>
         </div>
       </div>
+      {/* rendering modal */}
       <Modal
         handleSaveChanges={handleSaveChanges}
         handleCloseModal={handleCloseModal}
