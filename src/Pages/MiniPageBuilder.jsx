@@ -163,8 +163,12 @@ const MiniPageBuilder = () => {
   };
 
   return (
-    <div tabIndex={0} onKeyDown={(e) => handleKeyPress(e)}>
-      <div className="pageBuilderContainer">
+    <div>
+      <div
+        className="pageBuilderContainer"
+        tabIndex={0}
+        onKeyDown={(e) => handleKeyPress(e)}
+      >
         {/* blank page */}
         <div
           className="blankContainer"
